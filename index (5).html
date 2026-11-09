@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>KosKu – Kelola Kamar Kos</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Figtree:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="css/style.css?v=3">
+
+</head>
+<body>
+<section id="auth" class="auth" hidden>
+  <div class="hero" aria-hidden="true">
+    <div class="hero-logo">KosKu</div>
+    <p class="hero-tag">Untuk juragan kos modern</p>
+    <p class="hero-h">Kelola kos,<br>tanpa ribet.</p>
+    <p class="hero-p">Catat kamar, pantau yang kosong, tagih tepat waktu.</p>
+    <div class="mini">
+      <div>Kamar A1 <em>Terisi</em></div>
+      <div>Kamar A2 <em class="w">Telat bayar</em></div>
+      <div>Kamar A3 <em class="g">Kosong</em></div>
+    </div>
+  </div>
+  <div class="authside"><div class="authcard">
+    <h1 class="logo">KosKu<small>Catat kamar, pantau yang kosong, tagih tepat waktu.</small></h1>
+    <h2 id="authTitle"></h2>
+    <div class="tabs" id="authTabs" role="tablist">
+      <span class="pill"></span>
+      <button type="button" role="tab" data-m="login" aria-selected="true">Masuk</button>
+      <button type="button" role="tab" data-m="reg" aria-selected="false">Daftar</button>
+    </div>
+    <label class="f reg">Nama pemilik<input id="aNama" autocomplete="name" placeholder="mis. Ibu Sari"></label>
+    <label class="f">Email<input id="aUser" type="email" autocomplete="email" placeholder="nama@email.com"></label>
+    <label class="f">Password<span class="pw"><input id="aPass" type="password" autocomplete="current-password" placeholder="Minimal 6 karakter"><button type="button" class="pwt" id="pwT" aria-pressed="false" aria-label="Tampilkan password">Lihat</button></span></label>
+    <label class="f reg">Ulangi password<input id="aPass2" type="password" autocomplete="new-password"></label>
+    <p id="aErr" role="alert"></p>
+    <button class="btn primary" id="authBtn" style="width:100%"></button>
+    <button class="btn sm" id="swMode" style="margin-top:10px"></button>
+    <button class="btn sm linkbtn" id="reset" style="margin-top:10px">Lupa password? Kirim email reset</button>
+    <p class="small">Akun dan data disimpan di Firebase, jadi bisa dibuka dari HP maupun laptop.</p>
+  </div></div>
+</section>
+<div class="wrap" id="app" hidden>
+<header>
+  <h1 class="logo"><span id="kosName">KosKu</span><small id="kosAddr"></small></h1>
+  <div class="hbtns">
+    <button class="btn primary" id="add">Tambah kamar</button>
+    <button class="btn" id="share">Salin info kamar kosong</button>
+    <button class="btn" id="lap">Laporan</button>
+    <button class="btn" id="biayaBtn">Pengeluaran</button>
+    <button class="btn" id="profil">Profil kos</button>
+    <button class="btn" id="theme">Tema</button>
+    <button class="btn" id="logout">Keluar</button>
+  </div>
+</header>
+<section class="stats" id="stats" aria-live="polite"></section>
+<section class="remind" id="remind" hidden></section>
+<div class="tools">
+  <input type="search" id="q" placeholder="Cari nomor, fasilitas, penghuni, atau catatan" aria-label="Cari kamar">
+  <div class="chips" id="chips">
+    <button class="chip" data-f="semua" aria-pressed="true">Semua</button>
+    <button class="chip" data-f="kosong" aria-pressed="false">Kosong</button>
+    <button class="chip" data-f="terisi" aria-pressed="false">Terisi</button>
+    <button class="chip" data-f="telat" aria-pressed="false">Telat bayar</button>
+  </div>
+  <select id="sort" aria-label="Urutkan">
+    <option value="no">Urut nomor kamar</option>
+    <option value="murah">Harga termurah</option>
+    <option value="mahal">Harga termahal</option>
+    <option value="tempo">Jatuh tempo terdekat</option>
+  </select>
+</div>
+<section class="grid" id="list"></section>
+</div>
+
+<dialog id="dlg">
+  <h2 id="dtitle">Tambah kamar</h2>
+  <div class="row2">
+    <label class="f">Nomor kamar<input id="fNo" placeholder="mis. A3"></label>
+    <label class="f">Tipe<select id="fTipe"><option>Standar</option><option>AC</option><option>Kamar mandi dalam</option><option>VIP</option></select></label>
+  </div>
+  <div class="row2">
+    <label class="f">Harga per bulan (Rp)<input id="fHarga" type="number" min="0" step="10000"></label>
+    <label class="f">Status<select id="fStatus"><option value="kosong">Kosong</option><option value="terisi">Terisi</option></select></label>
+  </div>
+  <label class="f">Fasilitas (pisahkan dengan koma)<input id="fFas" placeholder="Kasur, Lemari, WiFi"></label>
+  <div id="occAll">
+    <div class="row2">
+      <label class="f">Nama penghuni<input id="fPeng"></label>
+      <label class="f">No. WhatsApp penghuni<input id="fWaP" inputmode="tel" placeholder="08xxxxxxxxxx"></label>
+    </div>
+    <div class="row2">
+      <label class="f">Tanggal masuk<input id="fMasuk" type="date"></label>
+      <label class="f">Deposit (Rp)<input id="fDep" type="number" min="0" step="10000"></label>
+    </div>
+    <label class="f">Jatuh tempo bayar<input id="fDue" type="date"></label>
+  </div>
+  <label class="f">Catatan<textarea id="fCat" rows="3" placeholder="mis. keran bocor, dicat ulang bulan depan"></textarea></label>
+  <div class="dact"><button class="btn" id="cancel">Batal</button><button class="btn primary" id="save">Simpan kamar</button></div>
+</dialog>
+<dialog id="pdlg">
+  <h2>Profil kos</h2>
+  <label class="f">Nama kos<input id="pKos" placeholder="mis. Kos Melati"></label>
+  <label class="f">Alamat lengkap<textarea id="pAlamat" rows="2"></textarea></label>
+  <div class="row2">
+    <label class="f">Nama pemilik<input id="pPemilik"></label>
+    <label class="f">No. WhatsApp<input id="pWa" inputmode="tel" placeholder="08xxxxxxxxxx"></label>
+  </div>
+  <div class="dact"><button class="btn" id="pCancel">Batal</button><button class="btn primary" id="pSave">Simpan profil</button></div>
+</dialog>
+<dialog id="ldlg"><h2 id="lt"></h2><div id="lb"></div><div class="dact"><button class="btn" id="lx">Tutup</button></div></dialog>
+<div id="printArea"></div>
+<div id="toast" role="status"></div>
+<script type="module" src="js/app.js?v=3"></script>
+<script>
+/* Tab Masuk/Daftar: memakai tombol #swMode milik app.js, jadi logika Firebase tidak berubah */
+(function(){
+  var tabs=document.getElementById("authTabs"),btn=document.getElementById("authBtn"),sw=document.getElementById("swMode");
+  function isReg(){return /daftar|buat/i.test(btn.textContent||"")}
+  function sync(){var r=isReg();tabs.classList.toggle("r",r);
+    tabs.querySelectorAll("button").forEach(function(b){b.setAttribute("aria-selected",String((b.dataset.m==="reg")===r))})}
+  tabs.addEventListener("click",function(e){var b=e.target.closest("[data-m]");if(!b)return;
+    if((b.dataset.m==="reg")!==isReg())sw.click();setTimeout(sync,0)});
+  new MutationObserver(sync).observe(btn,{childList:true,characterData:true,subtree:true});
+  sync();
+})();
+</script>
+</body>
+</html>
