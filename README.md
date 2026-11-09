@@ -9,7 +9,7 @@ Aplikasi web untuk membantu pemilik kos mencatat kamar, memantau kamar kosong, d
 | Nama | NPM | Peran |
 |------|-----|-------|
 | Zahra Ayu Azhari | 25312123 | Autentikasi, database, dan logika kamar |
-| [Nama kawan] | [NPM kawan] | Tampilan, laporan, dan dokumentasi |
+| Elvina Yulia Sari| 25312109 | Tampilan, laporan, dan dokumentasi |
 
 Universitas Teknokrat Indonesia
 
@@ -29,8 +29,6 @@ Universitas Teknokrat Indonesia
 - Laporan 6 bulan terakhir dan ekspor pembayaran ke CSV
 - Pencatatan pengeluaran dan kuitansi pembayaran yang bisa dicetak
 - Pengujian aplikasi, `README.md`, dan penyusunan laporan tugas
-
-> Catatan untuk tim: sesuaikan daftar di atas dengan pekerjaan yang benar-benar dikerjakan masing-masing, lalu ganti bagian dalam tanda kurung siku.
 
 ## Fitur
 - Login dan daftar akun pemilik kos (data tiap pemilik terpisah)
