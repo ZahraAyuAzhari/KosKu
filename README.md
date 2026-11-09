@@ -23,7 +23,7 @@ Universitas Teknokrat Indonesia
 - Pengingat tagihan dan tombol kirim WhatsApp ke penghuni
 - Fungsi bantu tanggal, rupiah, dan terbilang (`js/util.js`)
 
-### [Nama kawan] – Tampilan, laporan, dan dokumentasi
+### Elvina Yulia Sari – Tampilan, laporan, dan dokumentasi
 - Rancangan tampilan, tema terang dan gelap, serta tampilan responsif di HP (`index.html`, `css/style.css`)
 - Halaman login dan kartu ringkasan (hunian, potensi pemasukan, deposit, laba bersih)
 - Laporan 6 bulan terakhir dan ekspor pembayaran ke CSV
